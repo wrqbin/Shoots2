@@ -46,60 +46,70 @@ public class PostController {
     }
 
 
-
+    //"/list" URL로 GET 요청이 오면 이 메서드가 호출
     @GetMapping(value = "/list")
     public ModelAndView postlist(
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(defaultValue = "A") String category, // 기본 카테고리 추가
-            @RequestParam(defaultValue = "available") String status, // 기본값 추가
-            @RequestParam(defaultValue = "") String search_word,
+            @RequestParam(defaultValue = "available") String status, // 거래상태 기본값(거래가능) 추가
+            @RequestParam(defaultValue = "") String search_word, //게시글 제목 검색어 기본값(빈문자열)
             ModelAndView mv,
             HttpSession session) {
 
+        //세션에 현재 페이지가 "list"임을 저장. 나중에 상세 페이지에서 목록으로 돌아올 때 사용
         session.setAttribute("referer", "list");
 
-        int limit = 10; // 한 화면에 출력할 로우 갯수
+        int limit = 10; // 한 화면에 출력할 로우(게시글) 갯수
 
-//        // 페이지와 limit 값이 제대로 설정되었는지 확인
-//        int start = Math.max(0, (page - 1) * limit); // start가 음수일 수 없도록 Math.max 사용
-//        int end = limit; // 끝 값은 limit과 동일
-
-        int listcount = postService.getListCount(category, search_word); // 총 리스트 수를 받아옴
-        List<Post> list = postService.getPostList(page, limit, category, search_word, search_word); // 리스트를 받아옴
-
+        //선택한 카테고리와 검색어에 해당하는 총 게시글 수를 조회
+        int listcount = postService.getListCount(category, search_word);
+        //페이지네이션, 카테고리, 상태, 검색어 조건에 맞는 게시글 목록을 조회
+        List<Post> list = postService.getPostList(page, limit, category, status, search_word);
+        //총 게시글 수, 현재 페이지, 페이지당 게시글 수를 기반으로 페이지네이션 정보를 계산
         PaginationResult result = new PaginationResult(page, limit, listcount);
 
+        //응답으로 보여줄 뷰를 "post/post_list"로 설정
         mv.setViewName("post/post_list");
-        mv.addObject("page", page);
-        mv.addObject("maxpage", result.getMaxpage());
-        mv.addObject("startpage", result.getStartpage());
-        mv.addObject("endpage", result.getEndpage());
-        mv.addObject("listcount", listcount);
-        mv.addObject("postlist", list);
-        mv.addObject("limit", limit);
+
+        //뷰에 전달할 데이터를 ModelAndView 객체에 추가
+        mv.addObject("page", page); //페이지 번호
+        mv.addObject("maxpage", result.getMaxpage()); //최대 페이지 수
+        mv.addObject("startpage", result.getStartpage()); //시작 페이지 번호
+        mv.addObject("endpage", result.getEndpage()); //끝 페이지 번호
+        mv.addObject("listcount", listcount); //전체 게시글 수
+        mv.addObject("postlist", list); //게시글 목록
+        mv.addObject("limit", limit); //페이지당 게시글 수
         mv.addObject("pagination", result); // PaginationResult 객체를 전달
-        mv.addObject("category", category);
-        mv.addObject("status", status);
-        mv.addObject("search_word", search_word);
+        mv.addObject("category", category); //게시판 카테고리(자유A/중고B)
+        mv.addObject("status", status); //거래상태(중고게시판B)
+        mv.addObject("search_word", search_word); //검색어
         return mv;
     }
 
-    // AJAX 요청을 처리하여 게시글 목록 반환
+    // "/list_ajax" URL로 들어오는 GET 요청을 처리하여 게시글 목록 반환
+    //이 메서드는 앞서 설명한 postlist 메서드와 유사한 기능을 하지만, 주요 차이점은:
+    //이 메서드는 AJAX 요청을 처리하도록 설계
+    //뷰를 반환하지 않고 데이터만 JSON 형태로 반환함
+    //클라이언트에서 JavaScript를 통해 이 데이터를 받아 동적으로 페이지를 업데이트할 수 있음
+    //이런 방식으로 구현하면 페이지 전체를 새로고침하지 않고도 게시글 목록을 동적으로 업데이트할 수 있음
     @GetMapping(value = "/list_ajax")
     @ResponseBody
     public Map<String, Object> postListAjax(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit,
-            @RequestParam(defaultValue = "A") String category, // 기본값 추가
-            @RequestParam(defaultValue = "available") String status, // 기본값 추가
-            @RequestParam(defaultValue = "") String search_word
+            @RequestParam(defaultValue = "A") String category, // 게시판 기본값 추가
+            @RequestParam(defaultValue = "available") String status, // 거래상태 기본값 추가
+            @RequestParam(defaultValue = "") String search_word //검색어 기본값(빈문자열)
     ) {
 
         int listcount = postService.getListCount(category, search_word);
         List<Post> list = postService.getPostList(page, limit, category, status, search_word);
 
+        //총 게시글 수, 현재 페이지, 페이지당 게시글 수를 기반으로 페이지네이션 정보를 계산
         PaginationResult result = new PaginationResult(page, limit, listcount);
 
+        //모든 필요한 데이터를 Map에 저장하여 반환함
+        //이 Map은 자동으로 JSON으로 변환되어 클라이언트로 전송됨
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("page", page);
         map.put("maxpage", result.getMaxpage());

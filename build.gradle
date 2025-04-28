@@ -41,6 +41,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security' //시큐리티
     implementation 'org.springframework.boot:spring-boot-starter-mail' //메일
 
+    implementation 'mysql:mysql-connector-java:8.0.33' // db연결 안돼서 추가
+
     //sms
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'net.nurigo:sdk:4.3.0'

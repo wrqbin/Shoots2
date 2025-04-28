@@ -31,7 +31,7 @@ public interface PostService {
     public int getListCount(String category, String search_word);
 
     // 글 목록 보기
-    public List<Post> getPostList(int page, int limit, String category, String search_word, String searchWord);
+    public List<Post> getPostList(int page, int limit, String category, String status, String search_word);
 
     public List<Post> getAdminPostList(String search_word, int page, int limit);
 
