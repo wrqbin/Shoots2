@@ -33,6 +33,10 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
 	// MySQL 커넥터 추가
 	implementation 'com.mysql:mysql-connector-j:8.2.0'
+	// 여기에 Spring Security 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// 필요한 경우 thymeleaf와 security 통합
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 }
 
 tasks.named('test') {
