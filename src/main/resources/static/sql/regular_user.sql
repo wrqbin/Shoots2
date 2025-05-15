@@ -18,6 +18,10 @@ UPDATE regular_user
 SET role = 'admin'
 WHERE user_id = 'admin';
 
+INSERT INTO regular_user (user_id, password, name, jumin, gender, tel, email, role)
+VALUES
+    ('test', 'test', '테스트유저', '990101', 1, '01012345678', 'test@example.com', 'common');
+
 -- 테스트 데이터 삽입
 INSERT INTO regular_user (user_id, password, name, jumin, gender, tel, email, register_date, role)
 VALUES
