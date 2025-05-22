@@ -58,6 +58,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         }
 
         // 이전 페이지 정보가 없으면 메인 페이지로 리다이렉트
-        return "/Shoots2/mainBefore";
+//        return "/Shoots2/mainBefore";
+        return request.getContextPath() + "/mainBefore";
+        //request.getContextPath() + "/mainBefore"
     }
 }

@@ -46,7 +46,10 @@ public class PostController {
     }
 
 
-
+    //반환타입: ModelAndView
+    //응답: HTML 페이지 전체를 렌더링하여 반환
+    //용도: 페이지 첫 로딩 시 사용
+    //동작: 서버에서 post/post_list.html 템플릿을 렌더링하여 완전한 HTML 페이지 반환
     @GetMapping(value = "/list")
     public ModelAndView postlist(
             @RequestParam(value = "page", defaultValue = "1") int page,
@@ -84,7 +87,13 @@ public class PostController {
         return mv;
     }
 
+
+
     // AJAX 요청을 처리하여 게시글 목록 반환
+    //반환타입: Map<String, Object>
+    //응답: JSON 데이터만 반환
+    //용도: 페이지 새로고침 없이 동적으로 데이터만 갱신할 때 사용
+    //동작: JavaScript에서 받아서 페이지의 특정 부분만 업데이트
     @GetMapping(value = "/list_ajax")
     @ResponseBody
     public Map<String, Object> postListAjax(
