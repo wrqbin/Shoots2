@@ -5,7 +5,7 @@
 
 
 <!-- Mapper 인터페이스의 패키지명과 이름을 namespace로 설정합니다. -->
-<mapper namespace="com.Shoots.mybatis.mapper.PostMapper">
+<mapper namespace="com.Shoots2.mybatis.mapper.PostMapper">
 <!--
     1. 태그에 id속성은 Mapper인터페이스에 사용된 메서드명과 동일 하게 작성됩니다.
     2. resultType속성은 Mapper인터페이스에 사용된 메서드의 반환 타입을 작성해줍니다.
