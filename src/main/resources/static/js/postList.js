@@ -233,13 +233,13 @@ function updatePostList(data, category) {
 
 // 글쓰기 버튼 클릭 시 '글쓰기' 페이지로 이동
 function postWrite() {
-    location.href = "write";  // 카테고리 파라미터를 함께 전달
+    location.href = "/Shoots2/post/write";  // 카테고리 파라미터를 함께 전달
 }
 
 // 로그인이 필요한 경우 글쓰기 버튼 클릭 시
 function postWriteN() {
     alert("로그인 후 이용 가능합니다.");
-    location.href = "../login";
+    location.href = "/Shoots2/login";
 }
 
 
@@ -292,16 +292,6 @@ function ajax(sdata) {
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -670,14 +670,14 @@ $(document).ready(function() {
             var num = $('#post_idx').val(); // 게시글 ID 가져오기
             $.ajax({
                 type: "POST",
-                url: "../post/delete", // 게시글 삭제 URL
+                url: "/Shoots2/post/delete", // 게시글 삭제 URL
                 data: {
                     num: num // 삭제할 게시글 ID
                 },
                 success: function(response) {
                     alert("게시글이 삭제되었습니다.");
                     // 삭제 후 목록 페이지로 이동
-                    window.location.href = '../post/list';
+                    window.location.href = '/Shoots2/post/list';
                 },
                 error: function() {
                     alert("게시글 삭제에 실패했습니다. 다시 시도해주세요.");
