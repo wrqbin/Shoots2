@@ -101,7 +101,7 @@
 				<div class="contentD">
 					<!-- 이미지가 있을 때만 출력되도록 수정 -->
 					<th:block th:if="${not #strings.isEmpty(postdata.post_file)}">
-						<img th:src="@{'/upload' + ${#strings.replace(postdata.post_file, '\\', '/')}}"
+						<img th:src="@{'/upload' + ${postdata.post_file}}"
 							 style="width: 300px; margin-top: 20px;">
 					</th:block>
 					<!-- 이미지가 없을 때는 아무 것도 출력하지 않음 -->

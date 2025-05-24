@@ -118,6 +118,8 @@ public class PostController {
 
         if (uploadfile != null && !uploadfile.isEmpty()) {
             String fileDBName = postService.saveUploadFile(uploadfile, SAVE_FOLDER);
+            logger.info("파일 저장됨: " + fileDBName); // 로그 추가
+            logger.info("실제 저장 경로: " + SAVE_FOLDER + fileDBName); // 로그 추가
             post.setPost_file(fileDBName);
             post.setPost_original(uploadfile.getOriginalFilename());
         }

@@ -47,12 +47,15 @@ public interface PostService {
     }
 
 
+
+
     //데이터베이스에 저장할 파일 이름(경로 포함)을 생성
     default public String fileDBName(String fileName, String saveFolder) {
         String dateFolder = createFolderByDate(saveFolder);
         String fileExtension = getFileExtension(fileName);
         String refileName = generateUniqueFileName(fileExtension);
-        return File.separator + dateFolder + File.separator + refileName;
+        // 웹에서 사용할 때는 항상 / 사용
+        return "/" + dateFolder + "/" + refileName;
     }
 
 
