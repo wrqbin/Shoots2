@@ -181,7 +181,7 @@ function updatePostList(data, category) {
             //var postTitle = ($("#report_status").val() !== 'unblock')
             var postUnblock = (post.report_status !== 'unblock')
                 ? '<span style="color: #DA0130;">차단된 게시글 입니다.</span>'
-                : '<td class="jtdt"><a href="detail?num=' + post.post_idx + '">' +
+                : '<td class="jtdt"><a href="/Shoots2/post/detail?num=' + post.post_idx + '">' +
                 (post.title.length > 20 ? post.title.substring(0, 20) + '...' : post.title);
 
 
@@ -209,7 +209,7 @@ function updatePostList(data, category) {
         else {  // category A
             var postUnblock = (post.report_status !== 'unblock')
                 ? '<span style="color: #DA0130;">차단된 게시글 입니다.</span>'
-                : '<a href="detail?num=' + post.post_idx + '">'
+                : '<a href="/Shoots2/post/detail?num=' + post.post_idx + '">'
                     + (post.title.length > 20 ? post.title.substring(0, 20) + '...' : post.title);
 
             row.append('<td>' + postUnblock
