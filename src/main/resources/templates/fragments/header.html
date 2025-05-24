@@ -37,15 +37,14 @@
                 </div>
                 <li class="nav-item">
                     <div th:if="${session.id == null}">
-                        <span class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/login}">로그인</a>
-                        </span>
+                            <span class="nav-item">
+                                <a class="nav-link active" aria-current="page" th:href="@{/login}">로그인</a>
+                            </span>
                     </div>
                     <div th:if="${session.id != null}">
-                        <a class="nav-link active" aria-current="page" th:if="${session.businessAccess}" th:href="@{/business/dashboard}">[[${session.id}]]님</a>
-                        <a class="nav-link active" aria-current="page" th:if="${session.businessAccess == null && session.role == 'common'}" th:href="@{/myPage/info}">
+                        <a class="nav-link active" aria-current="page" th:if="${session.role == 'common'}" th:href="@{/myPage/info}">
                             [[${session.id.length() > 15 ? #strings.substring(session.id, 0, 15) + '...' : session.id}]]님</a>
-                        <a class="nav-link active" aria-current="page" th:if="${session.businessAccess == null && session.role == 'admin'}" th:href="@{/testAdmin}">[[${session.id}]]님</a>
+                        <a class="nav-link active" aria-current="page" th:if="${session.role == 'admin'}" th:href="@{/testAdmin}">[[${session.id}]]님</a>
                     </div>
                 </li>
                 <div th:if="${session.id != null}"> <!-- 세션에 아이디가 있으면 (=로그인 상태면)-->
