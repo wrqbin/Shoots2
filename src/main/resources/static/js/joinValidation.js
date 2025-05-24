@@ -15,14 +15,6 @@ $(function(){
             return;
         }
 
-        // 소셜 로그인 아이디들과 겹치지 못하도록 아이디 생성 막아두기
-        if (/^n_|^g_|^k_/.test(id)) {
-            $("#id-message").css('color','red')
-                .html("올바른 아이디가 아닙니다.");
-            checkid = false;
-            return;
-        }
-
         $.ajax({  //아이디 중복검사 : 개인회원
             url	: "idcheck",
             data : {"id" : id},

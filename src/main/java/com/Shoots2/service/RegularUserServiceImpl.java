@@ -42,24 +42,6 @@ public class RegularUserServiceImpl implements RegularUserService {
     }
 
     @Override
-    public RegularUser findByKakaoUserId(String kakaoId) {
-        RegularUser user = regularUserMapper.findByKakaoUserId(kakaoId);
-        return user;
-    }
-
-    @Override
-    public RegularUser findByGoogleUserId(String googleAuId) {
-        RegularUser user = regularUserMapper.findByGoogleUserId(googleAuId);
-        return user;
-    }
-
-    @Override
-    public RegularUser findByNaverAuId(String naverAuId) {
-        RegularUser user = regularUserMapper.findByNaverAuId(naverAuId);
-        return user;
-    }
-
-    @Override
     public int selectByIdPassword(String id, String password) {
         RegularUser user = regularUserMapper.selectById(id);
 
@@ -74,17 +56,10 @@ public class RegularUserServiceImpl implements RegularUserService {
         return 1;  //아이디와 비밀번호가 일치하는 경우
     }
 
-
     @Override
     public int insert(RegularUser user) {
         return regularUserMapper.insert(user);
     }
-
-    @Override
-    public int insert2(RegularUser user) {return regularUserMapper.insert2(user);}
-
-    @Override
-    public int insert3(RegularUser user) {return regularUserMapper.insert3(user);}
 
     @Override
     public int selectByEmail(String email) {
@@ -203,4 +178,3 @@ public class RegularUserServiceImpl implements RegularUserService {
         return regularUserMapper.deleteRegularUser(idx);
     }
 }
-

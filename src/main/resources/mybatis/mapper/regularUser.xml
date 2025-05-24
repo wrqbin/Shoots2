@@ -12,45 +12,12 @@
         select * from regular_user where user_id = #{id}
     </select>
 
-    <select id="findByKakaoUserId" resultType="regularuser">
-        select * from regular_user where user_id = CONCAT('k_', #{id})
-    </select>
-
-    <select id="findByGoogleUserId" resultType="regularuser">
-        select * from regular_user where user_id = CONCAT('g_', #{id})
-    </select>
-
-    <select id="findByNaverAuId" resultType="regularuser">
-        select * from regular_user where user_id = CONCAT('n_', #{id})
-    </select>
-
-
     <insert id="insert">
         insert into regular_user (user_id, password, name, jumin, gender, tel, email)
         values (#{user_id}, #{password}, #{name},
                 #{jumin}, #{gender}, #{tel}, #{email}
-                )
-    </insert>
-
-    <insert id="insert2">
-        insert into regular_user (user_id, password, name, email)
-        values (#{user_id}, #{password}, #{name}, #{email}
                )
     </insert>
-
-    <insert id="insert3">
-        insert into regular_user (user_id, password, name, email
-        <if test="tel != null">, tel</if>
-        <if test="jumin != null">, jumin</if>
-        <if test="gender != null">, gender</if>
-        )
-        values (#{user_id}, #{password}, #{name}, #{email}
-        <if test="tel != null">, #{tel}</if>
-        <if test="jumin != null">, #{jumin}</if>
-        <if test="gender != null">, #{gender}</if>
-        )
-    </insert>
-
 
     <select id="selectByEmail" resultType="regularuser">
         select * from regular_user where email = #{email}
@@ -59,7 +26,7 @@
     <select id="findIdWithEmail" resultType="regularuser">
         select * from regular_user
         WHERE email = #{email}
-        AND (user_id NOT LIKE 'g_%' AND email NOT LIKE 'k_%' AND email NOT LIKE 'n_%')
+          AND (user_id NOT LIKE 'g_%' AND user_id NOT LIKE 'k_%' AND user_id NOT LIKE 'n_%')
     </select>
 
     <select id="selectWithIdAndEmail" resultType="regularuser">
@@ -71,7 +38,7 @@
         set password = #{password}
         where user_id = #{user_id}
     </update>
-  
+
     <select id="getUserListForBusiness" resultType="java.util.Map">
         select r.*, COUNT(p.buyer_idx) AS cnt
         from regular_user r
@@ -113,8 +80,8 @@
     <select id="getUserList">
         select * from regular_user
         <include refid="search" />
-            order by idx
-            LIMIT #{offset}, #{pageSize}
+        order by idx
+        LIMIT #{offset}, #{pageSize}
     </select>
 
     <update id="setCommonUser">
@@ -156,9 +123,9 @@
             SUM(CASE WHEN r.gender = 3 THEN 1 ELSE 0 END) AS gender_3_count,
             SUM(CASE WHEN r.gender = 4 THEN 1 ELSE 0 END) AS gender_4_count
         FROM regular_user r
-        JOIN payment p ON r.idx = p.buyer_idx
+                 JOIN payment p ON r.idx = p.buyer_idx
         WHERE p.seller_idx = #{business_idx}
-        AND p.payment_status = 'paid'
+          AND p.payment_status = 'paid'
     </select>
 
     <delete id="deleteRegularUser">
