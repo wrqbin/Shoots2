@@ -30,7 +30,7 @@ public class RegularUserSecurityConfig {
                         .permitAll()
                 )
                 .logout(lo -> lo
-                        .logoutSuccessUrl("/main")
+                        .logoutSuccessUrl("/post")  // 로그아웃 후 게시판으로 이동
                         .logoutUrl("/logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
@@ -39,8 +39,8 @@ public class RegularUserSecurityConfig {
                 .authorizeHttpRequests(au -> au
                         // 정적 리소스 허용
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/upload/**").permitAll()
-                        // 기본 페이지 허용
-                        .requestMatchers("/", "/main", "/login", "/join").permitAll()
+                        // 기본 페이지 허용 - 메인 페이지를 게시판으로 변경
+                        .requestMatchers("/", "/post", "/post/", "/login", "/join").permitAll()
                         .requestMatchers("/loginProcess", "/regularJoinProcess").permitAll()
                         .requestMatchers("/idcheck", "/emailcheck").permitAll()
                         // 에러 페이지 허용

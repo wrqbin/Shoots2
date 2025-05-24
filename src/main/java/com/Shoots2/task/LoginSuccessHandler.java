@@ -35,7 +35,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         logger.info("세션 설정 완료 - ID: {}, IDX: {}, Role: {}",
                 regularUser.getUser_id(), regularUser.getIdx(), regularUser.getRole());
 
-        // 메인 페이지로 리다이렉트
-        response.sendRedirect(request.getContextPath() + "/main");
+        // 게시판 페이지로 리다이렉트 (메인 페이지 역할)
+        response.sendRedirect(request.getContextPath() + "/post");
     }
 }
