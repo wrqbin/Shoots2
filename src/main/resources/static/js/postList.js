@@ -82,7 +82,7 @@ function switchCategory(category, page = 1, searchWord = '') {
 
 
     $.ajax({
-        url: '/Shoots/post/list_ajax',
+        url: '/Shoots2/post/list_ajax',
         type: 'GET',
         data: {
             category: category,  // 카테고리 정보 전송
@@ -171,7 +171,7 @@ function updatePostList(data, category) {
             //중고게시판 리스트에서 첨부파일 이미지 미리보기
             if (post.post_file && /\.(jpg|jpeg|png|gif)$/i.test(post.post_file)) {
                 // 게시글 상세보기와 동일한 경로 형식 사용
-                var imageUrl = '/Shoots/upload' + post.post_file.replace(/\//g, '/'); // /upload -> \upload 형태로 변환
+                var imageUrl = '/Shoots2/upload' + post.post_file.replace(/\//g, '/'); // /upload -> \upload 형태로 변환
                 row.append('<td class="jtdI"><img src="' + imageUrl + '" style="width: 150px; height: 150px; object-fit: cover;"></td>');
             } else { //중고게시판은 첨부파일 반드시 넣어야해서 사실 필요없음
                 row.append('<td class="jtdI">-</td>');  // 이미지가 없으면 대시(-)로 표시
@@ -256,7 +256,7 @@ function ajax(sdata) {
 
     $.ajax({
         data: sdata,
-        url: "/Shoots/post/list_ajax",  // URL은 Spring Boot 컨텍스트 경로에 맞게 수정 필요
+        url: "/Shoots2/post/list_ajax",  // URL은 Spring Boot 컨텍스트 경로에 맞게 수정 필요
         dataType: "json",
         cache: false,
         // beforeSend : function(xhr)

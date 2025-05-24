@@ -7,7 +7,7 @@ function getList(state) {
   option = state; // state는 정렬 옵션을 받음
   $.ajax({
     type: "post",
-    url: "../comment/list",
+    url: "/Shoots2/comment/list",
     data: {
       "post_idx": $("#post_idx").val(),
       state: state
@@ -386,7 +386,7 @@ function ReportSubmitButton(paramData){
 function fetchReport(reqData) {
     //fetch start
     //category in ('POST','COMMENT','USER')
-    fetch('/Shoots/insertReport',{
+    fetch('/Shoots2/insertReport',{
         method:'POST',
         headers: {
             'Content-Type' : 'application/json'

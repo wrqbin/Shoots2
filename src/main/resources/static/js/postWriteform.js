@@ -46,7 +46,7 @@ $("form[name=writeform]").submit(function(event) {
 
 	// AJAX를 통해 폼 데이터 전송
 	$.ajax({
-		url: '/Shoots/post/add',  // 서버에 데이터 전송할 URL
+		url: '/Shoots2/post/add',  // 서버에 데이터 전송할 URL
 		type: 'POST',
 		data: formData,
 		contentType: false, // 파일 전송시 반드시 false로 설정
